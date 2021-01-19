@@ -159,7 +159,9 @@ export default class ArrayOfPrimitivesInput extends React.PureComponent<Props> {
         tabIndex={0}
         onFocus={onFocus}
         ref={this.setElement}
-        __unstable_presence={presence.filter((item) => item.path[0] === '$' || item.path.length === 0)}
+        __unstable_presence={presence.filter(
+          (item) => item.path[0] === '$' || item.path.length === 0
+        )}
         __unstable_changeIndicator={false}
         __unstable_markers={markers}
       >
