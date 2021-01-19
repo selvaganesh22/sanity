@@ -266,12 +266,12 @@ export default withValuePath(
             compareValue={compareValue?._ref}
           >
             <FormField
-              htmlFor={this._inputId}
-              __unstable_presence={markers}
+              inputId={this._inputId}
+              __unstable_markers={markers}
               title={type.title}
               level={level}
               description={type.description}
-              presence={presence}
+              __unstable_presence={presence}
             >
               <Stack space={2}>
                 {hasWeakMismatch && (

@@ -106,7 +106,7 @@ const SlugInput = React.forwardRef(function SlugInput(
         level={level}
         __unstable_markers={markers}
         __unstable_presence={presence}
-        htmlFor={inputId}
+        inputId={inputId}
       >
         <TextInput
           id={inputId}

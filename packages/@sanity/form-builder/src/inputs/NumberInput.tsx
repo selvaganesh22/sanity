@@ -24,7 +24,7 @@ const NumberInput = React.forwardRef(function NumberInput(
       __unstable_markers={markers}
       title={type.title}
       description={type.description}
-      htmlFor={id}
+      inputId={id}
       __unstable_presence={presence}
     >
       <TextInput

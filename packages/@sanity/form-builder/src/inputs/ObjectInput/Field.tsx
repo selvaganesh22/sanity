@@ -64,7 +64,7 @@ export default class Field extends React.PureComponent<FieldProps> {
       if (expectedType !== actualType && !isCompatible) {
         return (
           <div className={styles.root}>
-            <FormFieldSet title={field.type.title} level={level} presence={presence}>
+            <FormFieldSet title={field.type.title} level={level} __unstable_presence={presence}>
               <InvalidValueInput
                 value={value}
                 onChange={this.handleChange}

@@ -422,6 +422,8 @@ export default class FileInput extends React.PureComponent<Props, FileInputState
     return uploader ? [{type: type, uploader}] : []
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore (will be dealt with shortly)
   handleUpload = ({file, uploader}) => {
     this.uploadWith(uploader, file)
   }
@@ -453,7 +455,7 @@ export default class FileInput extends React.PureComponent<Props, FileInputState
           description={type.description}
           level={level}
           __unstable_presence={assetFieldPresence}
-          changeIndicator={false}
+          __unstable_changeIndicator={false}
         >
           <div>
             <Box>
@@ -475,8 +477,6 @@ export default class FileInput extends React.PureComponent<Props, FileInputState
                     onFiles={this.handleSelectFiles}
                     onFocus={this.handleFileTargetFocus}
                     onBlur={this.handleFileTargetBlur}
-                    onDragEnter={this.handleFileTargetDragEnter}
-                    onDragLeave={this.handleFileTargetDragLeave}
                   >
                     <AssetBackground align="center" justify="center">
                       {!readOnly && isDraggingOver && <Overlay>Drop top upload</Overlay>}

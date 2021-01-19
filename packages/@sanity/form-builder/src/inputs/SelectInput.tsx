@@ -37,12 +37,12 @@ const SelectInput = React.forwardRef(function SelectInput(
   )
   return (
     <FormField
-      htmlFor={inputId}
+      inputId={inputId}
       level={level}
       title={type.title}
       description={type.description}
-      __unstable_presence={markers}
-      presence={presence}
+      __unstable_markers={markers}
+      __unstable_presence={presence}
     >
       {isRadio ? (
         <RadioSelect

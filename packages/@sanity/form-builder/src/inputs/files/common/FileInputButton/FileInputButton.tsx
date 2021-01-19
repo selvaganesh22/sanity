@@ -69,7 +69,7 @@ export const FileInputButton = React.forwardRef(function FileInputButton(
   )
 
   return (
-    <SelectButton {...rest} forwardedAs="label" htmlFor={id}>
+    <SelectButton {...rest} forwardedAs="label" inputId={id}>
       <Input
         type="file"
         value=""

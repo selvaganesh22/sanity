@@ -64,7 +64,10 @@ export const ItemRow = React.forwardRef(function RegularItem(
 
           {!readOnly && validation.length > 0 && (
             <Box marginLeft={1} paddingX={1} paddingY={3}>
-              <FormFieldValidationStatus __unstable_markers={validation} showSummary={!value._ref} />
+              <FormFieldValidationStatus
+                __unstable_markers={validation}
+                __unstable_showSummary={!value._ref}
+              />
             </Box>
           )}
 

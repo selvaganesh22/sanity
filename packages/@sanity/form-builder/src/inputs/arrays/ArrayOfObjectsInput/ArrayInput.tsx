@@ -297,15 +297,15 @@ export class ArrayInput extends React.Component<Props> {
 
     return (
       <FieldSetComponent
-        changeIndicator={false}
+        __unstable_changeIndicator={false}
         tabIndex={0}
         title={type.title}
         description={type.description}
         onFocus={this.handleFocus}
         onBlur={onBlur}
         level={level - 1}
-        presence={presence.filter((item) => item.path[0] === '$')}
-        markers={markers}
+        __unstable_presence={presence.filter((item) => item.path[0] === '$')}
+        __unstable_markers={markers}
         {...fileTargetProps}
       >
         <Stack space={2}>

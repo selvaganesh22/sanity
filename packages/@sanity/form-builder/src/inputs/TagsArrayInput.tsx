@@ -28,7 +28,7 @@ export const TagsArrayInput = forwardRef(
     return (
       <FormField
         description={type.description}
-        htmlFor={id}
+        inputId={id}
         level={level}
         __unstable_markers={markers}
         __unstable_presence={presence}

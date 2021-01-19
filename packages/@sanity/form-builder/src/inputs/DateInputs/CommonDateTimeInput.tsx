@@ -101,8 +101,8 @@ export const CommonDateTimeInput = React.forwardRef(function CommonDateTimeInput
       title={title}
       level={level}
       description={description}
-      presence={presence}
-      htmlFor={id}
+      __unstable_presence={presence}
+      inputId={id}
     >
       {readOnly ? (
         <TextInput value={textInputValue} disabled />

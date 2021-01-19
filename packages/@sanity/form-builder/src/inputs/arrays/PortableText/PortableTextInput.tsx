@@ -267,9 +267,9 @@ export default withPatchSubscriber(
           description={type.description}
           title={type.title}
           level={level}
-          __unstable_presence={markers}
-          presence={presence}
-          changeIndicator={false}
+          __unstable_markers={markers}
+          __unstable_presence={presence}
+          __unstable_changeIndicator={false}
         >
           <PortableTextInputWithRef {...this.props} ref={this.editorRef} />
         </FormField>

@@ -26,7 +26,7 @@ const StringInput = React.forwardRef(function StringInput(
   return (
     <FormField
       description={type.description}
-      htmlFor={inputId}
+      inputId={inputId}
       level={level}
       __unstable_markers={markers}
       __unstable_presence={presence}

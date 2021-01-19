@@ -154,7 +154,7 @@ export default class ObjectInput extends React.PureComponent<ObjectInputProps> {
           collapsed={isCollapsed}
           __unstable_presence={childPresence}
           onFocus={onFocus}
-          changeIndicator={false}
+          __unstable_changeIndicator={false}
           __unstable_markers={markers}
           tabIndex={0}
         >
@@ -246,7 +246,7 @@ export default class ObjectInput extends React.PureComponent<ObjectInputProps> {
           __unstable_presence={presence}
           onFocus={onFocus}
           __unstable_changeIndicator={false}
-          markers={markers}
+          __unstable_markers={markers}
           tabIndex={0}
         >
           {renderedFields}

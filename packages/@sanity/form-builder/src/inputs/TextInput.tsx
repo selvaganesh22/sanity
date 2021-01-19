@@ -24,7 +24,7 @@ const TextInput = React.forwardRef(function TextInput(
       title={type.title}
       description={type.description}
       __unstable_presence={presence}
-      htmlFor={inputId}
+      inputId={inputId}
     >
       <TextArea
         id={inputId}

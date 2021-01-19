@@ -557,15 +557,15 @@ export default class ImageInput extends React.PureComponent<Props, ImageInputSta
         <ImperativeToast ref={this.setToast} />
 
         <FieldSetComponent
-          markers={markers}
-          presence={assetFieldPresence}
+          __unstable_markers={markers}
+          __unstable_presence={assetFieldPresence}
           title={type.title}
           description={type.description}
           level={level}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           ref={this.setFocusArea}
-          changeIndicator={false}
+          __unstable_changeIndicator={false}
           {...uploadProps}
         >
           <div

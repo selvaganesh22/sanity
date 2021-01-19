@@ -21,7 +21,7 @@ const TelephoneInput = React.forwardRef(function TelephoneInput(
       title={type.title}
       description={type.description}
       __unstable_presence={presence}
-      htmlFor={inputId}
+      inputId={inputId}
     >
       <TextInput
         type="tel"

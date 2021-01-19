@@ -21,7 +21,7 @@ const UrlInput = React.forwardRef(function UrlInput(
       title={type.title}
       description={type.description}
       __unstable_presence={presence}
-      htmlFor={inputId}
+      inputId={inputId}
     >
       <TextInput
         type="url"

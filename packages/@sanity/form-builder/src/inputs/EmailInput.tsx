@@ -19,7 +19,7 @@ const EmailInput = React.forwardRef(function EmailInput(
       level={level}
       title={type.title}
       description={type.description}
-      htmlFor={inputId}
+      inputId={inputId}
       __unstable_presence={presence}
       __unstable_markers={markers}
     >

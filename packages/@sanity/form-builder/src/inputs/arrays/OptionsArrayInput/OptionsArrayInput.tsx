@@ -117,8 +117,8 @@ export default class OptionsArrayInput extends React.PureComponent<OptionsArrayI
         description={type.description}
         __unstable_presence={presence}
         level={level}
-        __unstable_markers={changeIndicatorOptions}
-        __unstable_changeIndicator={markers}
+        __unstable_changeIndicator={changeIndicatorOptions}
+        __unstable_markers={markers}
       >
         <List isGrid={isGrid} isSortable>
           {options.map((option, index) => {

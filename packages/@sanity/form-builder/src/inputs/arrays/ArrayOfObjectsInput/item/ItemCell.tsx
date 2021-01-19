@@ -63,7 +63,7 @@ export const ItemCell = React.forwardRef(function ItemCell(
             <FormFieldValidationStatus
               __unstable_markers={validation}
               placement="bottom"
-              showSummary={!value._ref}
+              __unstable_showSummary={!value._ref}
             />
           </Box>
         )}
