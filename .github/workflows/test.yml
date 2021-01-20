@@ -68,3 +68,23 @@ jobs:
 
           # Test building the project with latest dependencies
           sanity build --skip-minify
+
+      - name: Notify Slack about build success
+        if: success() && github.ref == 'refs/heads/ui/beb/notifications-test'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: prj-components
+          status: SUCCESS
+          color: good
+
+      - name: Notify Slack about build failure
+        if: failure() && github.ref == 'refs/heads/ui/beb/notifications-test'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.ACTIONS_SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: prj-components
+          status: FAILED
+          color: danger
