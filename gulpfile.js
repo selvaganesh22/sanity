@@ -7,6 +7,7 @@ const changed = require('gulp-changed')
 const filter = require('gulp-filter')
 const chalk = require('chalk')
 const esbuild = require('gulp-esbuild')
+const babel = require('gulp-babel')
 const {runTsc} = require('./scripts/runTsc')
 const log = require('fancy-log')
 const through = require('through2')
@@ -41,6 +42,7 @@ const withDisplayName = (name, fn) => {
 }
 
 const TASK_INFO = {
+  babel: {title: 'Babel', color: chalk.yellowBright},
   esbuild: {title: 'Esbuild', color: chalk.yellowBright},
   assets: {title: 'Assets (copy)', color: chalk.greenBright},
   watch: {title: 'Watch', color: chalk.cyanBright},
@@ -54,7 +56,21 @@ const compileTaskName = (taskType, packagePath, extra = '') => {
   }`
 }
 
-function buildJavaScript(packageDir) {
+function buildWithBabel(packageDir) {
+  return withDisplayName(compileTaskName('babel', packageDir), () =>
+    src(`${SRC_DIR}/**/*.{js,ts,tsx}`, {cwd: packageDir})
+      .pipe(
+        changed(DEST_DIR, {
+          cwd: packageDir,
+          transformPath: (orgPath) => orgPath.replace(/\.tsx?$/, '.js'),
+        })
+      )
+      .pipe(babel())
+      .pipe(dest(DEST_DIR, {cwd: packageDir}))
+  )
+}
+
+function buildWithEsbuild(packageDir) {
   return withDisplayName(compileTaskName('esbuild', packageDir), () =>
     src(`${SRC_DIR}/**/*.{js,ts,tsx}`, {cwd: packageDir})
       .pipe(
@@ -87,8 +103,11 @@ function copyAssets(packageDir) {
   )
 }
 
-function buildPackage(packageDir) {
-  return parallel(buildJavaScript(packageDir), copyAssets(packageDir))
+function buildPackageWithBabel(packageDir) {
+  return parallel(buildWithBabel(packageDir), copyAssets(packageDir))
+}
+function buildPackageWithEsbuild(packageDir) {
+  return parallel(buildWithEsbuild(packageDir), copyAssets(packageDir))
 }
 
 function watchPackage(name, packageDir, task) {
@@ -112,20 +131,23 @@ const buildTS = function buildTS() {
   )
 }
 
-const buildJSAndAssets = parallel(PACKAGE_PATHS.map(buildPackage))
 const watchJSAndAssets = parallel(
   PACKAGE_PATHS.map((packageDir) =>
     watchPackage(
       compileTaskName('watch', packageDir, 'JS/Assets'),
       packageDir,
-      buildPackage(packageDir)
+      buildPackageWithBabel(packageDir)
     )
   )
 )
 
-exports.js = buildJSAndAssets
+const buildAllWithEsbuild = parallel(PACKAGE_PATHS.map(buildPackageWithEsbuild))
+const buildAllWithBabel = parallel(PACKAGE_PATHS.map(buildPackageWithBabel))
+
+exports.esbuild = buildAllWithEsbuild
+exports.babel = buildAllWithBabel
 exports.ts = buildTS
 exports.watchTS = series(buildTS, watchTS)
-exports.build = series(buildJSAndAssets, buildTS)
-exports.watch = series(buildJSAndAssets, parallel(watchJSAndAssets, watchTS))
+exports.build = series(buildAllWithBabel, buildTS)
+exports.watch = series(buildAllWithBabel, parallel(watchJSAndAssets, watchTS))
 exports.clean = () => del(PACKAGE_PATHS.map((pth) => path.join(pth, DEST_DIR)))
