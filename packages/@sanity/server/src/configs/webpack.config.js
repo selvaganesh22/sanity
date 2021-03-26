@@ -36,7 +36,6 @@ export default (config = {}) => {
     throw new Error(missingErr)
   }
 
-  const babelConfig = tryRead(path.join(basePath, '.babelrc'))
   const isProd = env === 'production'
 
   const cssExtractor = new ExtractTextPlugin({
@@ -93,15 +92,11 @@ export default (config = {}) => {
           test: /(\.jsx?|\.tsx?)/,
           exclude: /(node_modules|bower_components)/,
           use: {
-            loader: resolve('babel-loader'),
-            options: babelConfig || {
-              presets: [
-                resolve('@babel/preset-typescript'),
-                resolve('@babel/preset-react'),
-                [resolve('@babel/preset-env'), require('./babel-env-config')],
-              ],
-              plugins: [resolve('@babel/plugin-proposal-class-properties')].filter(Boolean),
-              cacheDirectory: true,
+            loader: resolve('esbuild-loader'),
+            options: {
+              loader: 'tsx',
+              target: ['es2020', 'chrome80', 'firefox80', 'safari11', 'edge18', 'node12'],
+              format: 'cjs',
             },
           },
         },
