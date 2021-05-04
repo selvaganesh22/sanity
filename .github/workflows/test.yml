@@ -35,7 +35,7 @@ jobs:
         run: npm run build
 
       - name: Test individual modules
-        run: npx lerna run test --concurrency 2 --stream
+        run: npx lerna run test --stream
 
       - name: Build CLI
         run: |
