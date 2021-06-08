@@ -3,12 +3,12 @@ import React from 'react'
 import {SchemaType} from '@sanity/types'
 import {sortBy} from 'lodash'
 import styled from 'styled-components'
-import {ResolvedUploader, Uploader} from '../../../../sanity/uploads/types'
+import {FileIsh, ResolvedUploader, Uploader} from '../../../../sanity/uploads/types'
 import {FileInfo, fileTarget} from '../../../common/fileTarget'
 import {Overlay} from './styles'
 
 type UploadTargetProps = {
-  getUploadOptions: (file: File) => ResolvedUploader[]
+  getUploadOptions: (file: FileIsh) => ResolvedUploader[]
   onUpload?: (event: {type: SchemaType; file: File; uploader: Uploader}) => void
   children?: React.ReactNode
 }

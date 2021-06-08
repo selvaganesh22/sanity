@@ -16,7 +16,7 @@ import {map} from 'rxjs/operators'
 import {Subscription} from 'rxjs'
 import {randomKey, resolveTypeName} from '@sanity/util/content'
 import {insert, PatchEvent, set, setIfMissing, unset} from '../../../PatchEvent'
-import {ResolvedUploader, Uploader, UploadEvent} from '../../../sanity/uploads/types'
+import {FileIsh, ResolvedUploader, Uploader, UploadEvent} from '../../../sanity/uploads/types'
 import {Alert} from '../../../components/Alert'
 import {Details} from '../../../components/Details'
 import {Item, List} from '../common/list'
@@ -60,10 +60,9 @@ export interface Props {
   onBlur: () => void
   focusPath: Path
   readOnly: boolean
-  directUploads?: boolean
   filterField: () => any
   ArrayFunctionsImpl: typeof ArrayFunctions
-  resolveUploader?: (type: SchemaType, file: File) => Uploader | null
+  resolveUploader?: (type: SchemaType, file: FileIsh) => Uploader | null
   resolveInitialValue?: (type: ObjectSchemaType, value: any) => Promise<any>
   presence: FormFieldPresence[]
 }
@@ -213,7 +212,7 @@ export class ArrayInput extends React.Component<Props> {
     this._focusArea = el
   }
 
-  getUploadOptions = (file: File): ResolvedUploader[] => {
+  getUploadOptions = (file: FileIsh): ResolvedUploader[] => {
     const {type, resolveUploader} = this.props
 
     if (!resolveUploader) {
@@ -282,7 +281,6 @@ export class ArrayInput extends React.Component<Props> {
       onFocus,
       compareValue,
       filterField,
-      directUploads,
       ArrayFunctionsImpl,
     } = this.props
 
@@ -348,7 +346,7 @@ export class ArrayInput extends React.Component<Props> {
         level={level - 1}
         __unstable_presence={fieldPresence.length > 0 ? fieldPresence : EMPTY_ARRAY}
         __unstable_markers={markers}
-        disabled={!directUploads || readOnly}
+        disabled={readOnly}
         ref={this.setFocusArea}
         getUploadOptions={this.getUploadOptions}
         onUpload={this.handleUpload}
