@@ -16,7 +16,7 @@ import {map} from 'rxjs/operators'
 import {Subscription} from 'rxjs'
 import {randomKey, resolveTypeName} from '@sanity/util/content'
 import {insert, PatchEvent, set, setIfMissing, unset} from '../../../PatchEvent'
-import {FileIsh, ResolvedUploader, Uploader, UploadEvent} from '../../../sanity/uploads/types'
+import {FileIsh, Uploader, UploadEvent} from '../../../sanity/uploads/types'
 import {Alert} from '../../../components/Alert'
 import {Details} from '../../../components/Details'
 import {Item, List} from '../common/list'
@@ -212,21 +212,6 @@ export class ArrayInput extends React.Component<Props> {
     this._focusArea = el
   }
 
-  getUploadOptions = (file: FileIsh): ResolvedUploader[] => {
-    const {type, resolveUploader} = this.props
-
-    if (!resolveUploader) {
-      return []
-    }
-
-    return type.of
-      .map((memberType) => ({
-        type: memberType,
-        uploader: resolveUploader(memberType, file),
-      }))
-      .filter((member) => member.uploader) as ResolvedUploader[]
-  }
-
   handleFixMissingKeys = () => {
     const {onChange, value} = this.props
     const patches = value.map((val, i) => setIfMissing(randomKey(), [i, '_key']))
@@ -278,6 +263,7 @@ export class ArrayInput extends React.Component<Props> {
       presence,
       focusPath,
       onBlur,
+      resolveUploader,
       onFocus,
       compareValue,
       filterField,
@@ -348,7 +334,8 @@ export class ArrayInput extends React.Component<Props> {
         __unstable_markers={markers}
         disabled={readOnly}
         ref={this.setFocusArea}
-        getUploadOptions={this.getUploadOptions}
+        resolveUploader={resolveUploader}
+        types={type.of}
         onUpload={this.handleUpload}
       >
         <ImperativeToast ref={this.setToast} />

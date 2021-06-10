@@ -39,4 +39,4 @@ export interface FileIsh {
   name?: string
 }
 
-export type UploaderResolver = (type: SchemaType, file: File) => Uploader | null
+export type UploaderResolver = (type: SchemaType, file: FileIsh) => Uploader | null
