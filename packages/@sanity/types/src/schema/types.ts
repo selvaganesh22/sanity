@@ -197,7 +197,9 @@ export interface AssetSchemaTypeOptions {
 }
 
 export interface FileSchemaType extends ObjectSchemaType {
-  options?: AssetSchemaTypeOptions
+  options?: AssetSchemaTypeOptions & {
+    sources?: AssetSource[]
+  }
 }
 
 export interface ImageSchemaType extends ObjectSchemaType {
