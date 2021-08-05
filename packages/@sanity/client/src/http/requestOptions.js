@@ -6,7 +6,7 @@ module.exports = (config, overrides = {}) => {
   const headers = {}
 
   const token = overrides.token || config.token
-  const proxy = config.proxy || "";
+  const proxy = config.proxy || undefined;
   if (token) {
     headers.Authorization = `Bearer ${token}`
   }
